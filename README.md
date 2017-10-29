@@ -1,7 +1,7 @@
 # SimpleJson
 Simple JSON parser for C#
 
-To use the parser for your project, simply copy  the JsonParser.cs into your project.
+To use the parser for your project, simply copy the JsonParser.cs file into your project.
 
 There are several benefits to SimpleJson over common alternatives:
 
@@ -9,7 +9,7 @@ There are several benefits to SimpleJson over common alternatives:
 * This only uses raw C# with no dependencies.
 * Unlike other third party libraries, this won't add more DLL clutter to your final binary.
 * The current "built in" method for parsing JSON requires including a System.Web assembly extension that isn't available in all versions of .NET.
-* By default supports strict JSON standard, but has several flags to toggle these on or off.
+* By default, SimpleJson will follow the strict JSON standard, but has several flags to toggle various leniencies on or off.
 * Order of keys from the JSON is always preserved in the Key collection iterator. Generally this shouldn't matter strictly following the standard, but there are certain edge cases where it is important.
 
 If you run this .sln project as-is, it is essentially just a unit test harness.
@@ -27,9 +27,10 @@ IDictionary<string, object> result = new JsonParser(myRawJsonText)
     .AddOption(JsonOption.OVERWRITE_DUPLICATE_KEYS) // Don't throw error on duplicate key
     .ParseAsDictionary();
 
+...
 ```
 
-The type of the dictionary value is generally the canonical C# type. Booleans, integers, strings, and nulls in the JSON will appear likewise in the resulting C# dictionary. JSON floats will be converted into C# `double`s. JSON lists will be `object[]`, and JSON objects will be `IDictionary<string, object>`. 
+The type of the dictionary value is generally the canonical C# type. Booleans, integers, strings, and nulls in the JSON will appear likewise in the resulting C# dictionary. JSON floats will be converted into C# doubles. JSON lists will be `object[]`, and JSON objects will be `IDictionary<string, object>`. Note that this is an `IDictionary` and not a regular `Dictionary`.
 
 ## Alternate Usage:
 
