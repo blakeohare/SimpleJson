@@ -1,0 +1,14 @@
+﻿{
+  "a": 123,
+  "b": 456,
+  "c": 7.89,
+  "d": 0.0123,
+  "e": null,
+  "f": true,
+  "g": false,
+  "h": [1, 2, 3],
+  "i": "hello, world!",
+  "j": "\"Hello, World!\"\n",
+  "k": [true, false, null, ""],
+  "l": { "a": 1, "b": null, "c": 3.14 }
+}

@@ -1,0 +1,4 @@
+﻿/* First comment */
+{
+/* comment */"a"/* more */:/* and more */"a"/* too much */
+}/* last comment */
