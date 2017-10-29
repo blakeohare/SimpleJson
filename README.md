@@ -50,4 +50,5 @@ This is the full list of parser options:
 | ALLOW_NON_OBJECT_AS_ROOT | This allows the root element to be something other than an object type. See *Alternate Usage* subheading. |
 | ALLOW_DECIMAL_AS_FLOAT_FIRST_CHAR | This allows float values that begin with a decimal. Generally strict JSON will not allow leading decimals without a 0 prefix. |
 | OVERWRITE_DUPLICATE_KEYS | Enabling this will make duplicate keys override the previous value. Otherwise duplicate keys will be an error. |
+| ALLOW_PYTHON_PRIMITIVES | This will allow you to parse an object that came from Python output as JSON which uses `True`, `False`, and `None` instead of `true`, `false`, and `null`. |
 
