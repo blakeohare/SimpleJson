@@ -45,7 +45,10 @@ namespace SimpleJson
                 { "a", 0.123 },
             }, new JsonOption[] { JsonOption.ALLOW_DECIMAL_AS_FLOAT_FIRST_CHAR });
 
-
+            TestRunner.RunTest("Samples/PythonPrimitives.txt", new Dictionary<string, object>()
+            {
+                { "py", new object[] { true, false, null } },
+            }, new JsonOption[] { JsonOption.ALLOW_PYTHON_PRIMITIVES });
         }
     }
 }

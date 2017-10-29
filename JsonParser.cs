@@ -42,6 +42,10 @@ namespace SimpleJson
         // This will allow objects with duplicate keys to pass the parser.
         // Later keys will overwrite values for previous identical keys.
         OVERWRITE_DUPLICATE_KEYS,
+
+        // This will recognize the Python primitives True, False, and None and convert them into
+        // true, false, and null respectively.
+        ALLOW_PYTHON_PRIMITIVES,
     }
 
     public class JsonParser
@@ -111,7 +115,22 @@ namespace SimpleJson
                 case "null":
                     tokens.Pop();
                     return null;
+
                 default:
+                    if (this.options.Contains(JsonOption.ALLOW_PYTHON_PRIMITIVES))
+                    {
+                        switch (tokenValue)
+                        {
+                            case "True":
+                            case "False":
+                                tokens.Pop();
+                                return tokenValue == "True";
+                            case "None":
+                                tokens.Pop();
+                                return null;
+                        }
+                    }
+
                     char c = tokenValue[0];
                     switch (c)
                     {
