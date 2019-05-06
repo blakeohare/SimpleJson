@@ -635,7 +635,9 @@ namespace SimpleJson
         public bool GetAsBoolean(string path, bool defaultValue) { object value = this.Get(path); return value == null ? defaultValue : (bool)value; }
         public bool GetAsBoolean(string path) { return GetAsBoolean(path, false); }
         public object[] GetAsList(string path) { return (Get(path) as object[]) ?? new object[0]; }
-        public IDictionary<string, object> GetAsLookup(string path) { return (Get(path) as IDictionary<string, object>) ?? new Dictionary<string, object>(); }
+        public IDictionary<string, object> GetAsDictionary(string path) { return (Get(path) as IDictionary<string, object>) ?? new Dictionary<string, object>(); }
+        public JsonLookup GetAsLookup(string path) { return new JsonLookup(GetAsDictionary(path)); }
+        public JsonLookup[] GetAsListOfLookups(string path) { return GetAsList(path).OfType<IDictionary<string, object>>().Select(d => new JsonLookup(d)).ToArray(); }
 
         public object Get(string path)
         {
