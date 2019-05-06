@@ -629,7 +629,7 @@ namespace SimpleJson
         public string GetAsString(string path, string defaultValue) { return GetAsString(path) ?? defaultValue; }
         public string GetAsString(string path) { return this.Get(path) as string; }
         public int GetAsInteger(string path, int defaultValue) { object value = this.Get(path); return value == null ? defaultValue : (int)value; }
-        public double GetAsInteger(string path) { return GetAsInteger(path, 0); }
+        public int GetAsInteger(string path) { return GetAsInteger(path, 0); }
         public double GetAsDouble(string path, double defaultValue) { object value = this.Get(path); return value == null ? defaultValue : (double)value; }
         public double GetAsDouble(string path) { return GetAsDouble(path, 0); }
         public bool GetAsBoolean(string path, bool defaultValue) { object value = this.Get(path); return value == null ? defaultValue : (bool)value; }
@@ -639,7 +639,7 @@ namespace SimpleJson
 
         public object Get(string path)
         {
-			// TODO: add support for list indexing as well
+            // TODO: add support for list indexing as well
             string[] steps = path.Split('.');
             IDictionary<string, object> current = this.root;
             for (int i = 0; i < steps.Length; ++i)
