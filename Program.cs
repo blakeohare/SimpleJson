@@ -49,6 +49,13 @@ namespace SimpleJson
             {
                 { "py", new object[] { true, false, null } },
             }, new JsonOption[] { JsonOption.ALLOW_PYTHON_PRIMITIVES });
+
+            TestRunner.RunTest("Samples/Unicode.txt", new Dictionary<string, object>()
+            {
+                { "jp", "初めまして。" },
+                { "emoji", "🤷" },
+                { "jp-emoji", "👺" },
+            });
         }
     }
 }

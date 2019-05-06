@@ -198,6 +198,16 @@ namespace SimpleJson
             throw token.Throw("Unrecognized float value: '" + token.Value + "'");
         }
 
+        private char GetUnicodeChar(string fourDigitHex)
+        {
+            int value;
+            if (int.TryParse(fourDigitHex, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out value))
+            {
+                return (char)value;
+            }
+            throw new JsonParserException("Could not parse unicode escape sequence: \"\\u" + fourDigitHex + "\"");
+        }
+
         private string ParseString(Token token, bool allowUnquoted)
         {
             string text = token.Value;
@@ -223,7 +233,13 @@ namespace SimpleJson
                                 case 't': sb.Append('\t'); break;
                                 case '\'': sb.Append('\''); break;
                                 case '"': sb.Append('"'); break;
-                                case 'u': throw new NotImplementedException(); // TODO: implement unicode.
+
+                                case 'u':
+                                    if (i + 5 >= length) throw token.Throw("Unicode escape sequence is invalid.");
+                                    sb.Append(GetUnicodeChar(text.Substring(i + 2, 4)));
+                                    i += 4;
+                                    break;
+
                                 default:
                                     throw token.Throw("Unrecognized escape sequence: '\\" + text[i + 1] + "'.");
                             }
